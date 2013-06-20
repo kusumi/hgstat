@@ -7,7 +7,7 @@ def popen_hg(*args):
     l.extend(args)
     p = subprocess.Popen(l, stdout=subprocess.PIPE)
     for x in p.stdout.readlines():
-        yield x.decode("ascii").rstrip()
+        yield x.decode("ascii", "ignore").rstrip()
 
 def popen_hglog(*args):
     l = ["log"]
