@@ -6,10 +6,9 @@ if __name__ == '__main__':
 
     test_date, sort = util.parse_option()
     d = dict([(x, 0) for x in range(24)])
-    p = util.popen_hglog("--template", "{date|isodate}\n")
     r = re.compile(r"^(\d{4}-\d{2}-\d{2}) (\d+):\d+ ")
 
-    for x in p:
+    for x in util.popen_hglog("--template", "{date|isodate}\n"):
         if x:
             m = r.match(x)
             if m:

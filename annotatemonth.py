@@ -13,23 +13,22 @@ if __name__ == '__main__':
     # e.g. 969b00db2418 Sat Mar 03 21:27:38 2012 +0900:
     r = re.compile(r"(\S+) [a-zA-Z]+ ([a-zA-Z]+) (\d+) \d+:\d+:\d+ (\d+) \S+:")
     months = dict([(x, i) for i, x in enumerate(calendar.month_abbr)])
-    manifest = [x for x in util.popen_hg("manifest") if x]
 
-    for f in sorted(manifest):
-        p = util.popen_hg("annotate", "-cd", f)
-        for x in p:
-            if x:
-                m = r.match(x)
-                if m:
-                    l = m.groups()
-                    k = "%s-%02d-%02d" % (l[3], months[l[1]], int(l[2]))
-                    if test_date(k):
-                        c.append(m.groups()[0])
-                        k = k[:-3]
-                        if k in d:
-                            d[k] += 1
-                        else:
-                            d[k] = 1
+    for f in util.popen_hg("manifest"):
+        if f:
+            for x in util.popen_hg("annotate", "-cd", f):
+                if x:
+                    m = r.match(x)
+                    if m:
+                        l = m.groups()
+                        k = "%s-%02d-%02d" % (l[3], months[l[1]], int(l[2]))
+                        if test_date(k):
+                            c.append(m.groups()[0])
+                            k = k[:-3]
+                            if k in d:
+                                d[k] += 1
+                            else:
+                                d[k] = 1
     if not d:
         print("No data")
         sys.exit(1)
