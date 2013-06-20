@@ -5,7 +5,7 @@ hgstat
 
 ### commitmonth.py
 
-    [root@localhost hgstat]# ./commitmonth.py
+    [root@localhost hgstat]# ./commitmonth.py -h
     Usage: commitmonth.py [options]
 
     Options:
