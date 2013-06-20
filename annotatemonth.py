@@ -15,20 +15,18 @@ if __name__ == '__main__':
     months = dict([(x, i) for i, x in enumerate(calendar.month_abbr)])
 
     for f in util.popen_hg("manifest"):
-        if f:
-            for x in util.popen_hg("annotate", "-cd", f):
-                if x:
-                    m = r.match(x)
-                    if m:
-                        l = m.groups()
-                        k = "%s-%02d-%02d" % (l[3], months[l[1]], int(l[2]))
-                        if test_date(k):
-                            c.append(m.groups()[0])
-                            k = k[:-3]
-                            if k in d:
-                                d[k] += 1
-                            else:
-                                d[k] = 1
+        for x in util.popen_hg("annotate", "-cd", f):
+            m = r.match(x)
+            if m:
+                l = m.groups()
+                k = "%s-%02d-%02d" % (l[3], months[l[1]], int(l[2]))
+                if test_date(k):
+                    c.append(m.groups()[0])
+                    k = k[:-3]
+                    if k in d:
+                        d[k] += 1
+                    else:
+                        d[k] = 1
     if not d:
         print("No data")
         sys.exit(1)

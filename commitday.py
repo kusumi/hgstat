@@ -10,12 +10,11 @@ if __name__ == '__main__':
     r = re.compile(r"^(\d{4}-\d{2}-\d{2}) .+ @(\S+) ")
 
     for x in util.popen_hglog("--template", "{date|isodate} @{date|date}\n"):
-        if x:
-            m = r.match(x)
-            if m:
-                date, day = m.groups()
-                if test_date(date) and day in days:
-                    d[day] += 1
+        m = r.match(x)
+        if m:
+            date, day = m.groups()
+            if test_date(date) and day in days:
+                d[day] += 1
     if sort:
         l = sorted([(v, k) for k, v in d.items()])
         g = reversed([x[1] for x in l])

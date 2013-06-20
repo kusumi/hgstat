@@ -8,7 +8,7 @@ if __name__ == '__main__':
     d = {}
 
     for x in util.popen_hglog("--template", "{date|shortdate}\n"):
-        if x and test_date(x):
+        if test_date(x):
             x = x[:-3] # cut -DD
             if x in d:
                 d[x] += 1
