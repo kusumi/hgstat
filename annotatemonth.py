@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 if __name__ == '__main__':
+    import calendar
     import re
     import sys
     import util
@@ -8,23 +9,10 @@ if __name__ == '__main__':
     test_date, sort = util.parse_option()
     d = {}
     c = []
-    months = {
-        "Jan" :  1,
-        "Feb" :  2,
-        "Mar" :  3,
-        "Apr" :  4,
-        "May" :  5,
-        "Jun" :  6,
-        "Jul" :  7,
-        "Aug" :  8,
-        "Sep" :  9,
-        "Oct" : 10,
-        "Nov" : 11,
-        "Dec" : 12,
-        }
 
     # e.g. 969b00db2418 Sat Mar 03 21:27:38 2012 +0900:
     r = re.compile(r"(\S+) [a-zA-Z]+ ([a-zA-Z]+) (\d+) \d+:\d+:\d+ (\d+) \S+:")
+    months = dict([(x, i) for i, x in enumerate(calendar.month_abbr)])
     s = util.popen_hg("manifest")
     manifest = [x for x in s.split('\n') if x]
 
