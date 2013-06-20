@@ -13,12 +13,11 @@ if __name__ == '__main__':
     # e.g. 969b00db2418 Sat Mar 03 21:27:38 2012 +0900:
     r = re.compile(r"(\S+) [a-zA-Z]+ ([a-zA-Z]+) (\d+) \d+:\d+:\d+ (\d+) \S+:")
     months = dict([(x, i) for i, x in enumerate(calendar.month_abbr)])
-    s = util.popen_hg("manifest")
-    manifest = [x for x in s.split('\n') if x]
+    manifest = [x for x in util.popen_hg("manifest") if x]
 
     for f in sorted(manifest):
-        s = util.popen_hg("annotate", "-cd", f)
-        for x in s.split('\n'):
+        p = util.popen_hg("annotate", "-cd", f)
+        for x in p:
             if x:
                 m = r.match(x)
                 if m:

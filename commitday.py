@@ -7,10 +7,10 @@ if __name__ == '__main__':
     test_date, sort = util.parse_option()
     days = "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"
     d = dict([(x, 0) for x in days])
-    s = util.popen_hglog("--template", "{date|isodate} @{date|date}\n")
+    p = util.popen_hglog("--template", "{date|isodate} @{date|date}\n")
     r = re.compile(r"^(\d{4}-\d{2}-\d{2}) .+ @(\S+) ")
 
-    for x in s.split('\n'):
+    for x in p:
         if x:
             m = r.match(x)
             if m:

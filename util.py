@@ -6,7 +6,8 @@ def popen_hg(*args):
     l = ["hg"]
     l.extend(args)
     p = subprocess.Popen(l, stdout=subprocess.PIPE)
-    return p.communicate()[0]
+    for x in p.stdout.readlines():
+        yield x.decode("ascii").rstrip()
 
 def popen_hglog(*args):
     l = ["log"]
@@ -40,7 +41,6 @@ def parse_option():
             print("before(<) '???'")
 
     def test_date(date):
-        assert isinstance(date, str)
         assert len(date) == 10
         return  (not ad and not bd) or \
                 (not ad and date < bd) or \

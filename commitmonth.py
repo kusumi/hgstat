@@ -6,9 +6,9 @@ if __name__ == '__main__':
 
     test_date, sort = util.parse_option()
     d = {}
-    s = util.popen_hglog("--template", "{date|shortdate}\n")
+    p = util.popen_hglog("--template", "{date|shortdate}\n")
 
-    for x in s.split('\n'):
+    for x in p:
         if x and test_date(x):
             x = x[:-3] # cut -DD
             if x in d:
