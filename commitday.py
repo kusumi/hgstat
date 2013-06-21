@@ -32,4 +32,4 @@ if __name__ == '__main__':
         print("%s %5d %4.1f[%%]" % (k, v, p))
 
     print('-' * 40)
-    print("    %5d" % tot)
+    print("    %5d changesets" % tot)
