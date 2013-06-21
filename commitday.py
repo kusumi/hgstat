@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 
 if __name__ == '__main__':
+    import calendar
     import re
     import util
 
     test_date, sort = util.parse_option()
-    days = "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"
+    days = list(calendar.day_abbr)
     d = dict([(x, 0) for x in days])
     r = re.compile(r"^(\d{4}-\d{2}-\d{2}) (\S+) ")
 
