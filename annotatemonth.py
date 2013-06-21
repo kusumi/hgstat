@@ -21,7 +21,7 @@ if __name__ == '__main__':
                 l = m.groups()
                 k = "%s-%02d-%02d" % (l[3], months[l[1]], int(l[2]))
                 if test_date(k):
-                    c.append(m.groups()[0])
+                    c.append(l[0])
                     k = k[:-3]
                     if k in d:
                         d[k] += 1
