@@ -26,10 +26,10 @@ if __name__ == '__main__':
             v = d[k]
         else:
             v = 0
-        if not tot:
-            p = 0
-        else:
+        if tot:
             p = 100.0 * v / tot
+        else:
+            p = 0
         print("%s %5d %4.1f[%%]" % (k, v, p))
         done.append(k)
 

@@ -29,10 +29,10 @@ if __name__ == '__main__':
         else:
             s = "PM"
             k -= 12
-        if not tot:
-            p = 0
-        else:
+        if tot:
             p = 100.0 * v / tot
+        else:
+            p = 0
         print("%2d %s %5d %4.1f[%%]" % (k, s, v, p))
 
     print('-' * 40)

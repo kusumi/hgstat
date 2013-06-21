@@ -24,10 +24,10 @@ if __name__ == '__main__':
     tot = sum(d.values())
     for k in g:
         v = d[k]
-        if not tot:
-            p = 0
-        else:
+        if tot:
             p = 100.0 * v / tot
+        else:
+            p = 0
         print("%s %5d %4.1f[%%]" % (k, v, p))
 
     print('-' * 40)
