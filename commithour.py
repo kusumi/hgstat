@@ -4,7 +4,7 @@ if __name__ == '__main__':
     import re
     import util
 
-    test_date, sort = util.parse_option()
+    test_date, sort, graph = util.parse_option()
     d = dict([(x, 0) for x in range(24)])
     r = re.compile(r"^(\d{4}-\d{2}-\d{2}) (\d+):\d+ ")
 
@@ -21,7 +21,13 @@ if __name__ == '__main__':
     else:
         g = range(24)
 
-    tot = sum(d.values())
+    l = d.values()
+    tot = sum(l)
+    if graph:
+        gfn = util.get_graph_bar_fn(19, max(l))
+    else:
+        gfn = None
+
     for k in g:
         v = d[k]
         if k < 12:
@@ -33,7 +39,11 @@ if __name__ == '__main__':
             p = 100.0 * v / tot
         else:
             p = 0
-        print("%2d %s %5d %4.1f[%%]" % (k, s, v, p))
+        if gfn:
+            b = gfn(v)
+        else:
+            b = ''
+        print("%2d %2s %5d %4.1f[%%]%s" % (k, s, v, p, b)) # 19
 
     print('-' * 40)
     print("      %5d changesets" % tot)

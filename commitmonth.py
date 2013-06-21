@@ -4,7 +4,7 @@ if __name__ == '__main__':
     import sys
     import util
 
-    test_date, sort = util.parse_option()
+    test_date, sort, graph = util.parse_option()
     d = {}
 
     for x in util.popen_hglog("--template", "{date|shortdate}\n"):
@@ -18,8 +18,13 @@ if __name__ == '__main__':
         print("No data")
         sys.exit(1)
 
+    l = d.values()
+    tot = sum(l)
+    if graph:
+        gfn = util.get_graph_bar_fn(21, max(l))
+    else:
+        gfn = None
     done = []
-    tot = sum(d.values())
 
     def fn(k):
         v = d.get(k, 0)
@@ -27,7 +32,11 @@ if __name__ == '__main__':
             p = 100.0 * v / tot
         else:
             p = 0
-        print("%s %5d %4.1f[%%]" % (k, v, p))
+        if gfn:
+            b = gfn(v)
+        else:
+            b = ''
+        print("%7s %5d %4.1f[%%]%s" % (k, v, p, b)) # 21
         done.append(k)
 
     if sort:
