@@ -23,7 +23,7 @@ def popen_hglog(*args):
 def get_size():
     try:
         x = fcntl.ioctl(0, termios.TIOCGWINSZ, '0' * 8)
-        return struct.unpack('H' * 4, x)[:2]
+        return struct.unpack("HHHH", x)[:2]
     except:
         print(sys.exc_info()[1])
 
@@ -32,7 +32,7 @@ def get_graph_bar_fn(statwidth, maxvalue):
     if not l:
         return None
     x = l[1] - statwidth
-    if x <= 0:
+    if x <= 0 or maxvalue <= 0:
         return None
     def fn(n):
         return '*' * int((1.0 * n / maxvalue) * x)
