@@ -43,7 +43,7 @@ if __name__ == '__main__':
             p = 100.0 * v / tot
         else:
             p = 0
-        print("%s %5d %4.1f[%%]" % (k, v, p))
+        print("%s %7d %4.1f[%%]" % (k, v, p))
         done.append(k)
 
     if sort:
@@ -67,4 +67,4 @@ if __name__ == '__main__':
             print('')
 
     print('-' * 40)
-    print("        %5d lines from %d changesets" % (tot, len(set(c))))
+    print("        %7d lines from %d changesets" % (tot, len(set(c))))
