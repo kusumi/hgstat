@@ -22,10 +22,7 @@ if __name__ == '__main__':
     tot = sum(d.values())
 
     def fn(k):
-        if k in d:
-            v = d[k]
-        else:
-            v = 0
+        v = d.get(k, 0)
         if tot:
             p = 100.0 * v / tot
         else:
