@@ -52,7 +52,7 @@ def parse_option():
     if opts.after:
         m = r.match(opts.after)
         if m:
-            ad = m.groups()[0]
+            ad = m.group(1)
             print("after(>=) '%s'" % ad)
         else:
             print("after(>=) '???'")
@@ -60,7 +60,7 @@ def parse_option():
     if opts.before:
         m = r.match(opts.before)
         if m:
-            bd = m.groups()[0]
+            bd = m.group(1)
             print("before(<) '%s'" % bd)
         else:
             print("before(<) '???'")

@@ -11,8 +11,8 @@ if __name__ == '__main__':
     for x in util.popen_hglog("--template", "{date|isodate}\n"):
         m = r.match(x)
         if m:
-            date = m.groups()[0]
-            hour = int(m.groups()[1])
+            date = m.group(1)
+            hour = int(m.group(2))
             if test_date(date):
                 d[hour] += 1
     if sort:
