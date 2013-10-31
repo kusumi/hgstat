@@ -2,6 +2,7 @@
 
 if __name__ == '__main__':
     import calendar
+    import os
     import re
     import sys
     import util
@@ -13,8 +14,10 @@ if __name__ == '__main__':
     # e.g. 969b00db2418 Sat Mar 03 21:27:38 2012 +0900:
     r = re.compile(r"(\S+) [a-zA-Z]+ ([a-zA-Z]+) (\d+) \d+:\d+:\d+ (\d+) \S+:")
     months = dict([(x, i) for i, x in enumerate(calendar.month_abbr)])
+    root = util.get_hg_root()
 
     for f in util.popen_hg("manifest"):
+        f = os.path.join(root, f)
         for x in util.popen_hg("annotate", "-cd", f):
             m = r.match(x)
             if m:

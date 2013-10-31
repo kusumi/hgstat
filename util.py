@@ -20,6 +20,9 @@ def popen_hglog(*args):
     l.extend(args)
     return popen_hg(*l)
 
+def get_hg_root(*args):
+    return tuple(popen_hg("root"))[0]
+
 def get_size():
     try:
         x = fcntl.ioctl(0, termios.TIOCGWINSZ, '0' * 8)
