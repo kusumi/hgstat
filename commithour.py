@@ -8,7 +8,7 @@ if __name__ == '__main__':
     d = dict([(x, 0) for x in range(24)])
     r = re.compile(r"^(\d{4}-\d{2}-\d{2}) (\d+):\d+ ")
 
-    for x in util.popen_hglog("--template", "{date|isodate}\n"):
+    for x in util.popen_hg_log("--template", "{date|isodate}\n"):
         m = r.match(x)
         if m:
             date = m.group(1)

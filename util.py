@@ -15,7 +15,7 @@ def popen_hg(*args):
         if len(ret):
             yield ret
 
-def popen_hglog(*args):
+def popen_hg_log(*args):
     l = ["log"]
     l.extend(args)
     return popen_hg(*l)

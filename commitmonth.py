@@ -7,7 +7,7 @@ if __name__ == '__main__':
     test_date, sort, graph = util.parse_option()
     d = {}
 
-    for x in util.popen_hglog("--template", "{date|shortdate}\n"):
+    for x in util.popen_hg_log("--template", "{date|shortdate}\n"):
         if test_date(x):
             x = x[:-3] # cut -DD
             if x in d:
